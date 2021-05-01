@@ -1,0 +1,680 @@
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:34:41 +0000] "GET /test HTTP/1.1" 200 155 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:34:41 +0000] "GET /favicon.ico HTTP/1.1" 404 172 "http://localhost:8080/test" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 21, in get_ui_data_cs_signals
+    return web.json_response( res, dumps=serializer)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 717, in json_response
+    headers=headers, content_type=content_type)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 519, in __init__
+    type(text))
+TypeError: text argument must be str (<class 'coroutine'>)
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:34:50 +0000] "GET /api/v1/signals/list HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+TypeError: get_signal_list_limit() takes 0 positional arguments but 1 was given
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:41:36 +0000] "GET /api/v1/signals/list HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 32, in get_ui_data_cs_signals
+    return web.json_response( res, dumps=serializer)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 717, in json_response
+    headers=headers, content_type=content_type)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 519, in __init__
+    type(text))
+TypeError: text argument must be str (<class 'coroutine'>)
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:41:41 +0000] "GET /api/v1/signals/all HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 32, in get_ui_data_cs_signals
+    return web.json_response( res, dumps=serializer)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 717, in json_response
+    headers=headers, content_type=content_type)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 519, in __init__
+    type(text))
+TypeError: text argument must be str (<class 'coroutine'>)
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:42:22 +0000] "GET /api/v1/signals/all HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 20, in get_signal_list_limit
+    res = main.get_signal_list_limit(data)
+AttributeError: module 'server.model.signals' has no attribute 'get_signal_list_limit'
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:43:45 +0000] "GET /api/v1/signals/all HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 20, in get_signal_list_limit
+    res = main.get_signal_list_limit(data)
+AttributeError: module 'server.model.signals' has no attribute 'get_signal_list_limit'
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:44:47 +0000] "GET /api/v1/signals/all HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 20, in get_signal_list_limit
+    res = main.get_signal_list_limit(data)
+  File "C:\vue_board1\server\model\signals.py", line 151, in get_signal_list_limit
+    params.update(kwargs)
+NameError: name 'kwargs' is not defined
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:45:34 +0000] "GET /api/v1/signals/all HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 20, in get_signal_list_limit
+    res = main.get_signal_list_limit(data)
+  File "C:\vue_board1\server\model\signals.py", line 153, in get_signal_list_limit
+    params['start_date'] = cast_date(start_date)
+  File "C:\vue_board1\server\model\signals.py", line 10, in cast_date
+    if isinstance(date, (datetime.datetime, )):
+NameError: name 'datetime' is not defined
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:46:50 +0000] "GET /api/v1/signals/all HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\vue_board1\server\model\signals.py", line 16, in cast_date
+    dt = datetime.datetime.strptime(date, '%d.%m.%Y')
+  File "C:\ProgramData\Anaconda3\lib\_strptime.py", line 577, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "C:\ProgramData\Anaconda3\lib\_strptime.py", line 359, in _strptime
+    (data_string, format))
+ValueError: time data '1900-01-01' does not match format '%d.%m.%Y'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 20, in get_signal_list_limit
+    res = main.get_signal_list_limit(data)
+  File "C:\vue_board1\server\model\signals.py", line 155, in get_signal_list_limit
+    params['start_date'] = cast_date(start_date)
+  File "C:\vue_board1\server\model\signals.py", line 19, in cast_date
+    dt = pendulum.parse(date)
+NameError: name 'pendulum' is not defined
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:47:42 +0000] "GET /api/v1/signals/all HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 20, in get_signal_list_limit
+    res = main.get_signal_list_limit(data)
+  File "C:\vue_board1\server\model\signals.py", line 159, in get_signal_list_limit
+    return get_data([q, qcnt, qdisttype], params, make_dict=True)
+TypeError: get_data() got an unexpected keyword argument 'make_dict'
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:49:11 +0000] "GET /api/v1/signals/all HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 22, in get_signal_list_limit
+    return web.json_response( res, dumps=serializer)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 717, in json_response
+    headers=headers, content_type=content_type)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 519, in __init__
+    type(text))
+TypeError: text argument must be str (<class 'coroutine'>)
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:53:32 +0000] "GET /api/v1/signals/all HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 22, in get_signal_list_limit
+    return web.json_response( res, dumps=serializer)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 717, in json_response
+    headers=headers, content_type=content_type)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 519, in __init__
+    type(text))
+TypeError: text argument must be str (<class 'coroutine'>)
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:17:53:36 +0000] "GET /api/v1/signals/all HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 32, in get_ui_data_cs_signals
+    return web.json_response( res, dumps=serializer)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 717, in json_response
+    headers=headers, content_type=content_type)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 519, in __init__
+    type(text))
+TypeError: text argument must be str (<class 'coroutine'>)
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:18:08:51 +0000] "GET /api/v1/signals/401 HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 32, in get_ui_data_cs_signals
+    return web.json_response( data=res, dumps=serializer)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 717, in json_response
+    headers=headers, content_type=content_type)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 519, in __init__
+    type(text))
+TypeError: text argument must be str (<class 'coroutine'>)
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:18:12:08 +0000] "GET /api/v1/signals/401 HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 22, in get_signal_list_limit
+    return web.json_response( data=res, dumps=serializer)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 717, in json_response
+    headers=headers, content_type=content_type)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 519, in __init__
+    type(text))
+TypeError: text argument must be str (<class 'coroutine'>)
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:18:12:27 +0000] "GET /api/v1/signals/all HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 22, in get_signal_list_limit
+    return web.json_response( data=res, dumps=serializer)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 717, in json_response
+    headers=headers, content_type=content_type)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 519, in __init__
+    type(text))
+TypeError: text argument must be str (<class 'coroutine'>)
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:18:15:59 +0000] "GET /api/v1/signals/all HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: SelectSelector
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_protocol.py", line 418, in start
+    resp = await task
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_app.py", line 458, in _handle
+    resp = await handler(request)
+  File "C:\vue_board1\server\api\signals.py", line 22, in get_signal_list_limit
+    return web.json_response( data=res, text=None, dumps=serializer)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 717, in json_response
+    headers=headers, content_type=content_type)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\aiohttp\web_response.py", line 519, in __init__
+    type(text))
+TypeError: text argument must be str (<class 'coroutine'>)
+INFO:aiohttp.access:127.0.0.1 [30/Apr/2021:18:33:15 +0000] "GET /api/v1/signals/all HTTP/1.1" 500 334 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+INFO:__main__:Board server started.
+INFO:__main__:Board server started.
+INFO:__main__:Board server started.
+INFO:__main__:Board server started.
+INFO:__main__:Board server started.
+INFO:__main__:Board server started.
+INFO:__main__:Board server started.
+INFO:__main__:Board server started.
+INFO:__main__:Board server started.
+INFO:app:Board server started.
+INFO:uvicorn.error:Started server process [21036]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [21036]
+INFO:app:Board server started.
+INFO:uvicorn.error:Started server process [21384]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:app:Board server started.
+INFO:uvicorn.error:Started server process [3184]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [3184]
+INFO:app:Board server started.
+INFO:uvicorn.error:Started server process [17416]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [17416]
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [1882]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [1923]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [1957]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2024]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2195]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2237]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2303]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/protocols/http/h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/middleware/proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/applications.py", line 199, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/applications.py", line 111, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 181, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 82, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 563, in __call__
+    match, child_scope = route.matches(scope)
+AttributeError: 'APIRouter' object has no attribute 'matches'
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2371]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/protocols/http/h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/middleware/proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/applications.py", line 199, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/applications.py", line 111, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 181, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 82, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 563, in __call__
+    match, child_scope = route.matches(scope)
+AttributeError: 'APIRouter' object has no attribute 'matches'
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2402]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2436]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/protocols/http/h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/middleware/proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/applications.py", line 199, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/applications.py", line 111, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 181, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 82, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 566, in __call__
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 227, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 41, in app
+    response = await func(request)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 201, in app
+    raw_response = await run_endpoint_function(
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 148, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/mnt/c/vue_board1/server/api/signals.py", line 39, in get_ui_data_cs_signals
+    idx = request.match_info.get('id', None)
+NameError: name 'request' is not defined
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/protocols/http/h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/middleware/proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/applications.py", line 199, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/applications.py", line 111, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 181, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 82, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 566, in __call__
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 227, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 41, in app
+    response = await func(request)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 201, in app
+    raw_response = await run_endpoint_function(
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 148, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/mnt/c/vue_board1/server/api/signals.py", line 28, in get_signal_list_limit
+    data = request.rel_url.query
+NameError: name 'request' is not defined
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2476]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/protocols/http/h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/middleware/proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/applications.py", line 199, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/applications.py", line 111, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 181, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 82, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 566, in __call__
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 227, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 41, in app
+    response = await func(request)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 201, in app
+    raw_response = await run_endpoint_function(
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 148, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/mnt/c/vue_board1/server/api/signals.py", line 31, in get_signal_list_limit
+    res = main.get_signal_list_limit(data)
+  File "/mnt/c/vue_board1/server/model/signals.py", line 68, in get_signal_list_limit
+    start_date = data.get('start_date', '1900-01-01')
+AttributeError: 'NoneType' object has no attribute 'get'
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2506]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/protocols/http/h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/middleware/proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/applications.py", line 199, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/applications.py", line 111, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 181, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 82, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 566, in __call__
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 227, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 41, in app
+    response = await func(request)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 201, in app
+    raw_response = await run_endpoint_function(
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 148, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/mnt/c/vue_board1/server/api/signals.py", line 31, in get_signal_list_limit
+    res = main.get_signal_list_limit(data)
+  File "/mnt/c/vue_board1/server/model/signals.py", line 68, in get_signal_list_limit
+    start_date = data.get('start_date', '1900-01-01')
+AttributeError: 'NoneType' object has no attribute 'get'
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/protocols/http/h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/middleware/proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/applications.py", line 199, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/applications.py", line 111, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 181, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 82, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 566, in __call__
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 227, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 41, in app
+    response = await func(request)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 201, in app
+    raw_response = await run_endpoint_function(
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 148, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/mnt/c/vue_board1/server/api/signals.py", line 31, in get_signal_list_limit
+    res = main.get_signal_list_limit(data)
+  File "/mnt/c/vue_board1/server/model/signals.py", line 68, in get_signal_list_limit
+    start_date = data.get('start_date', '1900-01-01')
+AttributeError: 'str' object has no attribute 'get'
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/protocols/http/h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/middleware/proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/applications.py", line 199, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/applications.py", line 111, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 181, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 82, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 566, in __call__
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 227, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 41, in app
+    response = await func(request)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 201, in app
+    raw_response = await run_endpoint_function(
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 148, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/mnt/c/vue_board1/server/api/signals.py", line 31, in get_signal_list_limit
+    res = main.get_signal_list_limit(data)
+  File "/mnt/c/vue_board1/server/model/signals.py", line 68, in get_signal_list_limit
+    start_date = data.get('start_date', '1900-01-01')
+AttributeError: 'str' object has no attribute 'get'
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2542]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2572]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/protocols/http/h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "/usr/local/lib/python3.8/dist-packages/uvicorn/middleware/proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/applications.py", line 199, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/applications.py", line 111, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 181, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/middleware/errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 82, in __call__
+    raise exc from None
+  File "/usr/local/lib/python3.8/dist-packages/starlette/exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 566, in __call__
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 227, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.8/dist-packages/starlette/routing.py", line 41, in app
+    response = await func(request)
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 201, in app
+    raw_response = await run_endpoint_function(
+  File "/usr/local/lib/python3.8/dist-packages/fastapi/routing.py", line 148, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/mnt/c/vue_board1/server/api/signals.py", line 39, in get_ui_data_cs_signals
+    idx = request.match_info.get('id', None)
+NameError: name 'request' is not defined
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2602]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2638]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [2939]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:__main__:Board server started.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:uvicorn.error:Started server process [3004]
+INFO:uvicorn.error:Waiting for application startup.
+INFO:uvicorn.error:Application startup complete.
+INFO:uvicorn.error:Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
