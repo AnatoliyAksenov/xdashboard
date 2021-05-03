@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-table v-model="filtered" :md-sort.sync="currentSort" :md-sort-order.sync="currentSortOrder" :md-sort-fn="customSort" md-card>
+    <md-table v-model="data" :md-sort.sync="currentSort" :md-sort-order.sync="currentSortOrder" :md-sort-fn="customSort" md-card>
       <md-table-toolbar>
         <div class="md-toolbar-section-start">
           <div class="md-layout md-gutter">
@@ -15,27 +15,32 @@
               </md-datepicker>  
             </div>
           </div>
+          <md-button class="md-icon-button" @click="showFilter=true;">
+            <md-icon>more_horiz</md-icon>
+          </md-button>
         </div>
         <div class="md-toolbar-section-end">
-            <md-button class="md-icon-button md-primary" @click="requestSignals();">
-              <md-icon>more_horiz</md-icon>            
+            <md-button class="md-icon-button md-primary" @click="updateTable();">
+              <md-icon>refresh</md-icon>            
             </md-button>
         </div>
       </md-table-toolbar>
 
       <md-table-empty-state
-        md-label="No users found"
-        :md-description="`No user found for this '${search}' query. Try a different search term or create a new user.`">
+        md-label="Загрузка данных"
+        :md-description="`Загрузка данных еще идёт или возникли проблемы с загрузкой.`">
       </md-table-empty-state>
 
       <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="ID" md-numeric>            
+        <md-table-cell md-label="#" md-numeric>            
             <md-button class="md-primary" @click="formActive = true; formData = item">{{ item.id }} </md-button>
         </md-table-cell>
-        <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
-        <md-table-cell md-label="Email" md-sort-by="email">{{ item.email }}</md-table-cell>
-        <md-table-cell md-label="Gender" md-sort-by="gender">{{ item.gender }}</md-table-cell>
-        <md-table-cell md-label="Job Title" md-sort-by="title">{{ item.title }}</md-table-cell>
+        <md-table-cell md-label="Событие" md-sort-by="type">{{ item.signal_type }}</md-table-cell>
+        <md-table-cell md-label="Дата" md-sort-by="signal_date">{{ item.signal_date }}</md-table-cell>
+        <md-table-cell md-label="Компания" md-sort-by="name">{{ item.name }}</md-table-cell>
+        <md-table-cell md-label="Сумма" md-sort-by="summ">{{ item.signal_sum }}</md-table-cell>
+        <md-table-cell md-label="ИНН" md-sort-by="inn">{{ item.inn }}</md-table-cell>
+        <md-table-cell md-label="Аналитик" md-sort-by="analist">{{ item.os_user }}</md-table-cell>
       </md-table-row>
     </md-table>
 
@@ -48,11 +53,43 @@
           </md-tab>
         </md-tabs>
     </md-dialog>
+    <!--FILTER dialoge-->
+    <md-dialog :md-active.sync="showFilter">
+      <md-dialog-title>Расширенный фильтр</md-dialog-title>
+      <md-dialog-content style="width: 300px; height: 350px;">
+        <div class="md-layout md-gutter">
+          <div class="md-layout-item">
+            <md-field>
+                <label>Сигналы</label>
+                <md-select v-model="lst" name="sig_type" id="sig_type" multiple>
+                  <md-option v-for="item in available_signals" :key="item.signal_type" :value="item.signal_type">
+                    {{item.signal_type}}
+                  </md-option>                      
+                </md-select>  
+            </md-field>
+            <md-field>
+              <label for="limit">Лимит строк</label>
+              <md-select id="limit" name="limit" v-model="limit">
+                <md-option value="50" key="50">{{50}}</md-option>
+                <md-option value="100" key="100">{{100}}</md-option>
+                <md-option value="500" key="500">{{500}}</md-option>
+                <md-option value="1000" key="1000">{{1000}}</md-option>
+              </md-select>
+            </md-field>
+          </div>
+        </div>
+      </md-dialog-content>  
+      <md-dialog-actions>
+        <md-button class="md-primary" @click="showFilter = false">Close</md-button>
+      </md-dialog-actions>
+    </md-dialog>
   </div>  
 </template>
 
 <script>
-  import get_signals from '../api/signals';
+  import { getSignals } from '../api/signals';
+  import { getSearch, getKey, updateHash } from '../utils/hash';
+  import * as d3 from 'd3-time';
 
   export default {
     name: 'SignalList',
@@ -60,50 +97,20 @@
       currentSort: 'name',
       currentSortOrder: 'asc',
       search: null,
-      filtered: [],
       formActive: false,
       date_from: new Date(),
       date_to:   new Date(),
       sending: false,
       form: {},
       data: [],
-      users: [
-        {
-          id: 1,
-          name: 'Shawna Dubbin',
-          email: 'sdubbin0@geocities.com',
-          gender: 'Male',
-          title: 'Assistant Media Planner'
-        },
-        {
-          id: 2,
-          name: 'Odette Demageard',
-          email: 'odemageard1@spotify.com',
-          gender: 'Female',
-          title: 'Account Coordinator'
-        },
-        {
-          id: 3,
-          name: 'Lonnie Izkovitz',
-          email: 'lizkovitz3@youtu.be',
-          gender: 'Female',
-          title: 'Operator'
-        },
-        {
-          id: 4,
-          name: 'Thatcher Stave',
-          email: 'tstave4@reference.com',
-          gender: 'Male',
-          title: 'Software Test Engineer III'
-        },
-        {
-          id: 5,
-          name: 'Clarinda Marieton',
-          email: 'cmarietonh@theatlantic.com',
-          gender: 'Female',
-          title: 'Paralegal'
-        }
-      ],
+      available_signals: [],
+      count: 0,
+      showFilter: false,
+      //filter
+      limit: 1000,
+      offset: 0,
+      order: 'n',
+      lst: 'all', // list of selected signals
       tabs: [
           {
               title: "Default",
@@ -133,14 +140,67 @@
         this.filtered = this.users.filter( (e, v) => { e.name.toLowerCase().includes( this.search ) });
         //console.log(this.search);
       },
-      requestSignals(){
-        this.data = get_signals();
+      fetchData(){
+        const params = getSearch();   
+        console.log(params);     
+        return getSignals(params);
+      },
+      updateTable(){
+        //resurrecting query params
+        const params = getSearch();
+        
+        this.date_from = params['date_from'] || d3.timeDay.offset(new Date(), -3);
+        this.date_to = params['date_to'] || d3.timeDay.offset(new Date(), 3);
+        this.limit = params['limit'] || 1000;
+        this.offset = params['offset'] || 0;
+        this.order = params['order'] || 'n';
+        this.lst = (params['lst'] || '').replace('all','').split(',');
+
+        this.fetchData().then( data => {
+          this.data = data[0];
+          this.count = data[1];
+          this.available_signals = data[2];
+          
+          console.log(this.available_signals);
+        });          
+      },
+      updateDateFrom(newVal, oldVal){
+        
+        const nv = window.location.hash.replace(`date_from=${oldVal}`, `date_from=${newVal}`);
+        window.location.hash = nv;
+      },
+      updateDateTo(newVal, oldVal){
+        const nv = window.location.hash.replace(`date_to=${oldVal}`, `date_to=${newVal}`);
+        window.location.hash = nv;
+      },
+      updateLimit(newVal, oldVal){
+        const nv = window.location.hash.replace(`limit=${oldVal}`, `limit=${newVal}`);
+        window.location.hash = nv;
+      },
+      updateOffset(newVal, oldVal){
+        const nv = window.location.hash.replace(`offset=${oldVal}`, `offset=${newVal}`);
+        window.location.hash = nv;
+      },
+      updateLst(newVal, oldVal){
+        const n = newVal.join(',');
+        const o = oldVal.join(',');
+        updateHash('lst', n, o);
       }
     },
     created(){
-        this.filtered = this.users;
-        //console.log(this.data);
-    }
+        // updating table and restore filtering from query params
+        this.updateTable();        
+    },
+    watch: {
+      // call again the method if the route changes
+      '$route': 'updateTable',
+      // call for change location
+      'date_from': 'updateDateFrom',
+      'date_to': 'updateDateTo',
+      'limit': 'updateLimit',
+      'offset': 'updateOffset',
+      'lst': 'updateLst'
+    },
   }
 </script>
 

@@ -65,10 +65,10 @@ def get_ui_data(idx):
 
 def get_signal_list_limit(data):
     
-    start_date = data.get('start_date', '1900-01-01')
-    end_date = data.get('end_date', '5999-12-31')
-    limit = data.get('limit', 1000)
-    offset = data.get('offset', 0)
+    start_date = data.get('date_from', '1900-01-01')
+    end_date = data.get('date_to', '5999-12-31')
+    limit = int(data.get('limit', 1000))
+    offset = int(data.get('offset', 0))
     lst = data.get('lst', "all")
     order = data.get('order', "n") 
     

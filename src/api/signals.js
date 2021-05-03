@@ -1,9 +1,13 @@
-import BASE_URL from './default'
+import axios from 'axios';
 
-export default {
-    get_signals: function() {
-        const response = fetch(BASE_URL + '/signals/all'); //
-        const data = response.json();
-        return data;
-    }
+import { BASE_URL } from '../api/default';
+import { getHash } from '../utils/hash';
+
+export function getSignals(params){ 
+    const hash = getHash(params);
+    return axios.get(`${BASE_URL}/signals/all` + hash ).then(res => res.data);
 };
+
+export function getSignal(id){
+    return axios.get(`${BASE_URL}/signals/${id}`).then(res => res.data);
+}
