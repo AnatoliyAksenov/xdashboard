@@ -5,12 +5,12 @@
         <div class="md-toolbar-section-start">
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-size-50">
-              <md-datepicker v-model="date_from" :md-model-type="string" :md-immediately="true">
+              <md-datepicker v-model="date_from" :md-model-type="String" :md-immediately="true">
                 <label>Период с</label>
               </md-datepicker>              
             </div>
             <div class="md-layout-item md-size-50">
-              <md-datepicker v-model="date_to" :md-model-type="string" :md-immediately="true">
+              <md-datepicker v-model="date_to" :md-model-type="String" :md-immediately="true">
                 <label>Период по</label>
               </md-datepicker>  
             </div>
@@ -33,7 +33,7 @@
 
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="#" md-numeric>            
-            <md-button class="md-primary" @click="formActive = true; formData = item">{{ item.id }} </md-button>
+            <md-button class="md-primary md-dense" @click="formActive = true; formData = item">{{ item.id }} </md-button>
         </md-table-cell>
         <md-table-cell md-label="Событие" md-sort-by="type">{{ item.signal_type }}</md-table-cell>
         <md-table-cell md-label="Дата" md-sort-by="signal_date">{{ item.signal_date }}</md-table-cell>
@@ -47,11 +47,12 @@
     <!--Modal forms-->
     <md-dialog :md-active.sync="formActive">
         <md-dialog-title>Сводка по сигналу</md-dialog-title>
-        <md-tabs md-dynamic-height>          
-          <md-tab :md-label="'Заголовок'" v-for="tab in tabs" :key="tab.id">
-              {{ tab.content }}
-          </md-tab>
-        </md-tabs>
+        <md-dialog-content>
+          <signal-form :id="formData.id" />
+        </md-dialog-content>
+        <md-dialog-actions>
+          <md-button class="md-primary" @click="formActive = false">Close</md-button>
+        </md-dialog-actions>
     </md-dialog>
     <!--FILTER dialoge-->
     <md-dialog :md-active.sync="showFilter">
@@ -89,15 +90,19 @@
 <script>
   import { getSignals } from '../api/signals';
   import { getSearch, getKey, updateHash } from '../utils/hash';
+
   import * as d3 from 'd3-time';
+  import SignalForm from './SignalForm.vue';
 
   export default {
+  components: { SignalForm },
     name: 'SignalList',
     data: () => ({
       currentSort: 'name',
       currentSortOrder: 'asc',
       search: null,
       formActive: false,
+      formData: {},
       date_from: new Date(),
       date_to:   new Date(),
       sending: false,
@@ -111,18 +116,6 @@
       offset: 0,
       order: 'n',
       lst: 'all', // list of selected signals
-      tabs: [
-          {
-              title: "Default",
-              content: "test",
-              id: 1
-          },
-          {
-              title: "Default2",
-              content: "test2",
-              id: 2
-          },
-      ]
     }),
     methods: {
       customSort (value) {
@@ -141,13 +134,13 @@
         //console.log(this.search);
       },
       fetchData(){
-        const params = getSearch();   
-        console.log(params);     
+        const params = getSearch() || {};   
+            
         return getSignals(params);
       },
       updateTable(){
         //resurrecting query params
-        const params = getSearch();
+        const params = getSearch() || {};
         
         this.date_from = params['date_from'] || d3.timeDay.offset(new Date(), -3);
         this.date_to = params['date_to'] || d3.timeDay.offset(new Date(), 3);
@@ -165,25 +158,28 @@
         });          
       },
       updateDateFrom(newVal, oldVal){
-        
-        const nv = window.location.hash.replace(`date_from=${oldVal}`, `date_from=${newVal}`);
-        window.location.hash = nv;
+        // const nv = window.location.hash.replace(`date_from=${oldVal}`, `date_from=${newVal}`);
+        // window.location.hash = nv;
+        updateHash('date_from', newVal, oldVal);
       },
       updateDateTo(newVal, oldVal){
-        const nv = window.location.hash.replace(`date_to=${oldVal}`, `date_to=${newVal}`);
-        window.location.hash = nv;
+        // const nv = window.location.hash.replace(`date_to=${oldVal}`, `date_to=${newVal}`);
+        // window.location.hash = nv;
+        updateHash('date_to', newVal, oldVal);
       },
       updateLimit(newVal, oldVal){
-        const nv = window.location.hash.replace(`limit=${oldVal}`, `limit=${newVal}`);
-        window.location.hash = nv;
+        // const nv = window.location.hash.replace(`limit=${oldVal}`, `limit=${newVal}`);
+        // window.location.hash = nv;
+        updateHash('limit', newVal, oldVal);
       },
       updateOffset(newVal, oldVal){
-        const nv = window.location.hash.replace(`offset=${oldVal}`, `offset=${newVal}`);
-        window.location.hash = nv;
+        // const nv = window.location.hash.replace(`offset=${oldVal}`, `offset=${newVal}`);
+        // window.location.hash = nv;
+        updateHash('offset', newVal, oldVal)
       },
       updateLst(newVal, oldVal){
-        const n = newVal.join(',');
-        const o = oldVal.join(',');
+        const n = newVal.join(',').substr(1);
+        const o = (oldVal || '').join(',').substr(1);
         updateHash('lst', n, o);
       }
     },

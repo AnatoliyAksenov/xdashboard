@@ -1,68 +1,86 @@
-# from aiohttp import web
-import json
-
 from server.model import main 
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
-
-restapi = APIRouter()
 
 BASE_URL = '/api/v1'
 
-def serializer( obj ):
-    return json.dumps(obj, default=str)
+restapi = APIRouter(
+    prefix=f"{BASE_URL}/main",
+    tags=["main"],
+    responses={404: {"description": "Not found"}},
+)
 
 
-@restapi.get(f'{BASE_URL}/stat/signals_info')
-async def api_signals_info(request):
+@restapi.get('/dict/{key}/{format}')
+async def get_dictionary(request: Request):
+    """Returns dictionary by key in required format
+    """
+    key = request.path_params.get('key', None)
+    fmt = request.path_params.get('format', 'dict')
+
+    key = key.upper()
+    fmt = fmt.lower()
+
+    res = main.get_dictionary(key)
+    if res:
+        if fmt == 'dict':
+            return {x.get('dict_key'):x.get('dict_val') for x in res}
+        if fmt == 'list':
+            return res
+
+    return None
+
+@restapi.get('/signals_stat')
+async def api_signals_info(request: Request):
     """Returns signal statistics
     """
-    data = main.get_signals_stat()
+    res = main.get_signals_stat()
 
-    return web.json_response( data, dumps=serializer)
+    return res
 
 
-@restapi.get(f'{BASE_URL}/company_balance')
-async def rests_by_inn(request):
+@restapi.get('/company_balance')
+async def rests_by_inn(request: Request):
     """Возвращает остатки по счетам принадлежащим указанному ИНН
     """
     
-    inn = request.rel_url.query.get('inn', None)
+    inn = request.query_params.get('inn', None)
     if inn:
-        data = main.get_rests_by_inn(inn)
-        return web.json_response( data, dumps=serializer)
+        res = main.get_rests_by_inn(inn)
+        return res
     
-    raise web.HTTPBadRequest(text='Got empty INN param')
+    raise []
 
 
-@restapi.get(f'{BASE_URL}/client_x_inn')
-async def clients_by_inn(request):
+@restapi.get('/client_x_inn')
+async def clients_by_inn(request: Request):
     """Возвращает записи из таблицы клиентов содержащие указанный ИНН
     """
     
-    inn = request.rel_url.query.get('inn', None)
+    inn = request.query_params.get('inn', None)
     if inn:
-        data = main.get_client_by_inn(inn)
-        return web.json_response( data, dumps=serializer)
+        res = main.get_client_by_inn(inn)
+        return res
 
-    raise web.HTTPBadRequest(text='Got empty INN param')   
+    raise []
 
 
-@restapi.get(f'{BASE_URL}/client_x_group')
-async def get_groups_data():
+@restapi.get('/client_x_group')
+async def get_groups_data(request: Request):
     """Возвращает список групп компаний и ИНН входящие в группу        
     """
     res = main.get_inn_groups()
 
-    return web.json_response( data, dumps=serializer)
+    return res
 
 
-@restapi.get(f'{BASE_URL}/client_loans')
-async def get_loaners_monitor():
+@restapi.get('/client_loans')
+async def get_loaners_monitor(request: Request):
     """Возвращает данные по задолженности заемщиков банка.
     """
 
     res = main.get_loaners_monitor()
     
-    return web.json_response( data, dumps=serializer)
+    return request
+   

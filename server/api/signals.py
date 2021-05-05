@@ -1,5 +1,4 @@
-# from aiohttp import web
-import json
+from server.model import signals as main
 
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
@@ -11,9 +10,6 @@ restapi = APIRouter(
     tags=["signals"],
     responses={404: {"description": "Not found"}},
 )
-
-from server.model import signals as main 
-
 
 @restapi.get('/all')
 async def get_signal_list_limit(request: Request):

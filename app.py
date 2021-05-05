@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
 from server.api.main import restapi as main_api
-from server.api.case import restapi as case_api
+from server.api.cases import restapi as cases_api
 from server.api.graph import restapi as graph_api
 from server.api.signals import restapi as signals_api
 
@@ -28,8 +28,8 @@ app.mount("/static", StaticFiles(directory="dist/static"), name="dict")
 
 # HANDLE ROUTES
 ## restapi routes
-# app.add_routes(main_api)
-# app.add_routes(case_api)
+app.include_router(main_api)
+app.include_router(cases_api)
 # app.add_routes(graph_api)
 app.include_router(signals_api)
 

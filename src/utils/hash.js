@@ -27,7 +27,7 @@ export function getHash(params){
 }
 
 export function updateHash(param, newVal, oldVal){
-    const hash = getSearch();
+    const hash = getSearch() || {};
     hash[param] = newVal;
     const start = window.location.hash.split('?')[0];
     window.location.hash = start + getHash(hash);

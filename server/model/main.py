@@ -4,6 +4,14 @@ get_data = corp.get_data
 
 q_id = "select last_insert_rowid() as id"
 
+def get_dictionary(key):
+    q = """select dict_key, dict_val from corp1.tbl_dictionary where dict_type = %(type)s
+    """
+    p = {"type": key}
+    res = get_data(q, p)
+
+    return res
+
 
 def get_signals_stat():
     q = """

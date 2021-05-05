@@ -437,7 +437,7 @@ def get_signal_list():
             WHERE confirmation in (0,1)
         """
 
-    return execute(q)
+    return get_data(q)
 
 
 def get_user_list():
@@ -450,4 +450,4 @@ def get_user_list():
          WHERE isd = 0;
     """
 
-    return execute(q)    
+    return get_data(q)    

@@ -1,13 +1,13 @@
 <template>
   <div class="md-layout md-gutter">
-    <div class="md-layout-item md-size-100">
+    <div class="md-layout-item md-size-100" style="padding-left: 10px;">
       <h1>{{ main.signal_type }} {{ main.name }}</h1>
       <h3>{{ main.signal_date }}</h3>
       <h3>{{ main.inn }}</h3>
     </div>
     <div class="md-layout-item md-size-100">
       <md-tabs class="md-transparent" md-active-tab="0">        
-        <md-tab v-for="(tab, index) in visible_tabs" :key="index" v-bind:md-label="tab.title">
+        <md-tab v-for="(tab, index) in visible_tabs" :key="index" v-bind:md-label="tab.title" :id="index">
           <!--Show tab data like key-value dictionary-->
           <md-tab-body v-if="tab.content_type == 'dict'">
             <h3>{{ tab.title }}</h3>
@@ -63,8 +63,6 @@
           this.visible_tabs = this.all_tabs.filter( e => e.visible == 1);
 
           this.main = data[1];
-          console.log(this.all_tabs);
-          console.log(this.main)
         })
       }
     },
