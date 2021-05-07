@@ -2,8 +2,9 @@
 import json
 
 from server.model import cases as main 
+from server.model.auth import User, get_current_active_user
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Depends
 from fastapi.responses import JSONResponse
 
 BASE_URL = '/api/v1'
@@ -16,7 +17,7 @@ restapi = APIRouter(
 
 
 @restapi.get('/all')
-async def get_case_all(request: Request):
+async def get_case_all(request: Request, current_user: User = Depends(get_current_active_user)):
     """Возвращает список кейсов
     """
     data = dict(request.query_params)

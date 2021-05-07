@@ -9,6 +9,8 @@ import CaseForm from '@/views/CaseForm'
 import Instruments from '@/views/Instruments'
 import TransactionGraph from '@/views/TransactionGraph'
 
+import Unauthorized from '@/views/Unauthorized'
+
 Vue.use(Router)
 
 export default new Router({
@@ -44,5 +46,9 @@ export default new Router({
         name: 'Transaction Graph',
         component: TransactionGraph,
         props: true
+    },{
+        path: '/unauthorized',
+        name: 'Unauthorized',
+        component: Unauthorized,
     }]
 })
