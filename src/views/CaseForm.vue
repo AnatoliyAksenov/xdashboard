@@ -80,7 +80,7 @@
         })
       }
     },
-    created(){
+    mounted(){
         this.updateForm();
         main.get_dictionary('HAZARD_LEVEL', 'dict').then( data => {
           this.hazard_level = data;

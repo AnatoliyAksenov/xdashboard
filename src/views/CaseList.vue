@@ -132,7 +132,7 @@
         });
       }
     },
-    created(){
+    mounted(){
         this.updateTable()
     },
     watch: {

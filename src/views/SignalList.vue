@@ -92,7 +92,11 @@
   import { getSearch, getKey, updateHash } from '../utils/hash';
 
   import * as d3 from 'd3-time';
+  import * as d3tf from 'd3-time-format';
   import SignalForm from './SignalForm.vue';
+
+  //TODO: Move to utils
+  const formatDate = d3tf.timeFormat('%Y-%m-%d')
 
   export default {
   components: { SignalForm },
@@ -103,8 +107,8 @@
       search: null,
       formActive: false,
       formData: {},
-      date_from: new Date(),
-      date_to:   new Date(),
+      date_from: formatDate(new Date()),
+      date_to:   formatDate(new Date()),
       sending: false,
       form: {},
       data: [],
@@ -115,7 +119,7 @@
       limit: 1000,
       offset: 0,
       order: 'n',
-      lst: 'all', // list of selected signals
+      lst: [], // list of selected signals
     }),
     methods: {
       customSort (value) {
@@ -140,14 +144,14 @@
       },
       updateTable(){
         //resurrecting query params
-        const params = getSearch() || {};
+        // const params = getSearch() || {};
         
-        this.date_from = params['date_from'] || d3.timeDay.offset(new Date(), -3);
-        this.date_to = params['date_to'] || d3.timeDay.offset(new Date(), 3);
-        this.limit = params['limit'] || 1000;
-        this.offset = params['offset'] || 0;
-        this.order = params['order'] || 'n';
-        this.lst = (params['lst'] || '').replace('all','').split(',');
+        // this.date_from = params['date_from'] || formatDate( d3.timeDay.offset(new Date(), -3) );
+        // this.date_to = params['date_to'] || formatDate( d3.timeDay.offset(new Date(), 3) );
+        // this.limit = params['limit'] || 1000;
+        // this.offset = params['offset'] || 0;
+        // this.order = params['order'] || 'n';
+        // this.lst = (params['lst'] || '').split(',');
 
         this.fetchData().then( data => {
           this.data = data[0];
@@ -178,17 +182,34 @@
         updateHash('offset', newVal, oldVal)
       },
       updateLst(newVal, oldVal){
-        const n = newVal.join(',').substr(1);
-        const o = (oldVal || '').join(',').substr(1);
+        const n = newVal.join(',');
+        const o = oldVal;
         updateHash('lst', n, o);
       }
     },
-    created(){
+    beforeMount(){
+      const params = getSearch() || {};
+      this.date_from = params['date_from'] || formatDate( d3.timeDay.offset(new Date(), -3) );
+      this.date_to = params['date_to'] || formatDate( d3.timeDay.offset(new Date(), 3) );
+      this.limit = params['limit'] || 1000;
+      this.offset = params['offset'] || 0;
+      this.order = params['order'] || 'n';
+      this.lst = (params['lst'] || '').split(',');
+
+      updateHash('date_from', this.date_from, '');
+      updateHash('date_to', this.date_to, '');
+      updateHash('limit', this.limit, '');
+      updateHash('offset', this.offset, '');
+      updateHash('order', this.order, '');
+      updateHash('lst', this.lst, '');
+    },
+    mounted(){
         // updating table and restore filtering from query params
         this.updateTable();        
     },
     watch: {
-      // call again the method if the route changes
+      // call again the method if the route changes 
+      // or any part of rote hash
       '$route': 'updateTable',
       // call for change location
       'date_from': 'updateDateFrom',

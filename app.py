@@ -25,9 +25,16 @@ app = FastAPI()
 async def root_index():
     return FileResponse("dist/index.html")
 
+
 @app.get("/index.html")
 async def root_index():
     return FileResponse("dist/index.html")
+
+
+@app.get("/app.js")
+async def root_index():
+    return FileResponse("dist/app.js")    
+
 
 app.mount("/static", StaticFiles(directory="dist/static"), name="dict")
 

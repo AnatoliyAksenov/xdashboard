@@ -2,7 +2,7 @@
 import json
 
 from server.model import cases as main 
-from server.model.auth import User, get_current_active_user
+from server.model.auth import User, check_user_permissions
 
 from fastapi import APIRouter, Request, Depends
 from fastapi.responses import JSONResponse
@@ -17,7 +17,7 @@ restapi = APIRouter(
 
 
 @restapi.get('/all')
-async def get_case_all(request: Request, current_user: User = Depends(get_current_active_user)):
+async def get_case_all(request: Request, current_user: User = Depends(check_user_permissions(['ANALYST']))):
     """Возвращает список кейсов
     """
     data = dict(request.query_params)
@@ -27,7 +27,7 @@ async def get_case_all(request: Request, current_user: User = Depends(get_curren
 
 
 @restapi.get('/{case_id}')
-async def get_case(request: Request):
+async def get_case(request: Request, current_user: User = Depends(check_user_permissions(['ANALYST']))):
     """Получение содержимого кейса
     """
     case_id = request.path_params.get('case_id', None)
@@ -37,7 +37,7 @@ async def get_case(request: Request):
     
 
 @restapi.get('/{case_id}/graph')
-async def get_case_graph(request: Request):
+async def get_case_graph(request: Request, current_user: User = Depends(check_user_permissions(['ANALYST']))):
     """Возвращает список __Графов__ сохраненных для **Кейса**
     """
     case_id = request.path_params.get('case_id', None)
@@ -47,7 +47,7 @@ async def get_case_graph(request: Request):
 
 
 @restapi.post('/new')
-async def create_case(request: Request):
+async def create_case(request: Request, current_user: User = Depends(check_user_permissions(['ANALYST']))):
     """Создание нового кейса
     """
     data = request.json()
@@ -58,7 +58,7 @@ async def create_case(request: Request):
 
 
 @restapi.post('{case_id}/edit')
-async def edit_case(request):    
+async def edit_case(request: Request, current_user: User = Depends(check_user_permissions(['ANALYST']))):    
     """Редактирование данных **Кейса**
     """
     data = request.json()
@@ -71,7 +71,7 @@ async def edit_case(request):
 
 
 @restapi.delete('/{case_id}/del')
-async def delete_case(request: Request):
+async def delete_case(request: Request, current_user: User = Depends(check_user_permissions(['MANAGER']))):
     """Удаление **Кейса**
     Производится мягкое удаление. С возможностью восстановить с помощью __Администратора__ системы через базу данных.
     """

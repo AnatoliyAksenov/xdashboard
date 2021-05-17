@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 from fastapi import Depends, HTTPException, status, Request, Response
@@ -39,7 +39,8 @@ class User(BaseModel):
 
 
 class UserInDB(User):
-    id: str
+    id: int
+    acl: Optional[list] = list()
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -71,6 +72,15 @@ def get_user(username: str):
     res = corp.get_data(q, {"username": username})
     if res:
         user_dict = res[0]
+        # read user permissions
+        qq = """
+            SELECT r.key role_key
+            FROM auth.tbl_user_to_role rtl
+            JOIN auth.tbl_roles r on r.key = rtl.role_key
+            WHERE rtl.user_id = %(id)s
+            """
+        res = corp.get_data(qq, {"id": user_dict['id']}) 
+        user_dict['acl'] = [x['role_key'] for x in res]
         return UserInDB(**user_dict)
 
     return None
@@ -108,7 +118,6 @@ async def get_current_user(request: Request):
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
-
     
     # Сheck token in blacklist
     # TODO: Move blacklist to redis
@@ -123,13 +132,26 @@ async def get_current_user(request: Request):
         token_data = TokenData( username=username )
     except JWTError:
         raise credentials_exception
+    
     user = get_user( username=token_data.username )
     if user is None:
         raise credentials_exception
+    
     return user
 
 
 async def get_current_active_user(current_user: User = Depends(get_current_user)):
-    if current_user.disabled:
-        raise HTTPException(status_code=400, detail="Inactive user")
+    """Check authentication without checking any user permissions
+    """    
     return current_user
+
+
+def check_user_permissions(required_acls):
+    """Check user permissions
+    """
+    async def result_func(current_user: User = Depends(get_current_user)):
+        if current_user.acl:
+            if len(set(required_acls) - set(current_user.acl)) > 0:
+                raise HTTPException(status_code=403, detail="Permission denied")
+        return current_user
+    return result_func

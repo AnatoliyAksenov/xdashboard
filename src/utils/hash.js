@@ -28,7 +28,14 @@ export function getHash(params){
 
 export function updateHash(param, newVal, oldVal){
     const hash = getSearch() || {};
-    hash[param] = newVal;
     const start = window.location.hash.split('?')[0];
+    if (newVal.length > 0){
+        hash[param] = newVal;        
+    } else {
+        //clear 
+        delete hash[param];
+    }
+    
     window.location.hash = start + getHash(hash);
+    
 }

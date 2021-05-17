@@ -2,7 +2,7 @@
 <div>
   <md-content>
 
-        <h3>Ошибка авторизации</h3>
+        <h3>Отказано в доступе</h3>
         <md-button class="md-raised md-primary" @click="$router.go(-2)">
           Назад
         </md-button>
@@ -19,6 +19,6 @@
   }
 </script>
 
-<style scoped>
+<style>
 
 </style>

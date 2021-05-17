@@ -1,5 +1,5 @@
 <template>
-	<donut v-bind:param="'drops'" v-bind:idname="'drops'" v-bind:data="signal_data.filter( e => e.signal_type == 'drops' )"/>
+	<donut v-if="isMounted" v-bind:param="this.param" v-bind:idname="this.name" v-bind:data="signal_data.filter( e => e.name == this.name && e.report_date == this.report_date )"/>
 </template>
 
 <script>
@@ -9,10 +9,23 @@
 	export default {
         components: { donut },
         data: () => ({
-            signal_data: []
+            signal_data: [],
+            isMounted: false,
+            report_date: '2020-09-30',
+            param: 'summ',
+            name: 'drops'
         }),
-        beforeCreate(){
-            this.signal_data = get_signal_stat()
+        methods: {
+            getData(){
+                return get_signal_stat();
+            }
+        },
+        beforeMount(){
+             this.getData().then( data => {
+                 this.signal_data = data;
+                 window.signal_data = data;
+                 this.isMounted = true;
+             })
         }
 	}
 

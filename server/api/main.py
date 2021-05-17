@@ -1,6 +1,8 @@
 from server.model import main 
 
-from fastapi import APIRouter, Request
+from server.model.auth import User, check_user_permissions, get_current_active_user
+
+from fastapi import APIRouter, Request, Depends
 from fastapi.responses import JSONResponse
 
 BASE_URL = '/api/v1'
@@ -13,7 +15,7 @@ restapi = APIRouter(
 
 
 @restapi.get('/dict/{key}/{format}')
-async def get_dictionary(request: Request):
+async def get_dictionary(request: Request, current_user: User = Depends(get_current_active_user)):
     """Returns dictionary by key in required format
     """
     key = request.path_params.get('key', None)
@@ -32,7 +34,7 @@ async def get_dictionary(request: Request):
     return None
 
 @restapi.get('/signals_stat')
-async def api_signals_info(request: Request):
+async def api_signals_info(request: Request, current_user: User = Depends(get_current_active_user)):
     """Returns signal statistics
     """
     res = main.get_signals_stat()
@@ -41,7 +43,7 @@ async def api_signals_info(request: Request):
 
 
 @restapi.get('/company_balance')
-async def rests_by_inn(request: Request):
+async def rests_by_inn(request: Request, current_user: User = Depends(get_current_active_user)):
     """Возвращает остатки по счетам принадлежащим указанному ИНН
     """
     
@@ -54,7 +56,7 @@ async def rests_by_inn(request: Request):
 
 
 @restapi.get('/client_x_inn')
-async def clients_by_inn(request: Request):
+async def clients_by_inn(request: Request, current_user: User = Depends(get_current_active_user)):
     """Возвращает записи из таблицы клиентов содержащие указанный ИНН
     """
     
@@ -67,7 +69,7 @@ async def clients_by_inn(request: Request):
 
 
 @restapi.get('/client_x_group')
-async def get_groups_data(request: Request):
+async def get_groups_data(request: Request, current_user: User = Depends(get_current_active_user)):
     """Возвращает список групп компаний и ИНН входящие в группу        
     """
     res = main.get_inn_groups()
@@ -76,7 +78,7 @@ async def get_groups_data(request: Request):
 
 
 @restapi.get('/client_loans')
-async def get_loaners_monitor(request: Request):
+async def get_loaners_monitor(request: Request, current_user: User = Depends(get_current_active_user)):
     """Возвращает данные по задолженности заемщиков банка.
     """
 

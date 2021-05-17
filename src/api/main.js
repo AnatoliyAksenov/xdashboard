@@ -1,23 +1,19 @@
-import axios from 'axios';
+import { get, post, del } from '../utils/http'; 
 
 import { BASE_URL } from '../api/default';
 
-export default {
-    get_signal_stat: function() {
+
+export function get_signal_stat() {
         // get signal statistic for donuts
-        axios.get(`${BASE_URL}/main/stat/signals_info`).then(res => res.data).then(data => {
-            return data;
-        }).catch( err => {
-            console.log(err);
-            return [];
-        });
-    },
-    get_dictionary: function(key, fmt) {
+        return get(`${BASE_URL}/main/signals_stat`)
+               .then(res => res.data);
+    }
+export function get_dictionary(key, fmt) {
         // gets dictionary data
         // available formats: list and dict
         // list: [{dict_val, dict_key}, ... ]
         // dict: {dict_key: dict_val, ... }
-        return axios.get(`${BASE_URL}/main/dict/${key}/${fmt}`).then(res => res.data);
+        return get(`${BASE_URL}/main/dict/${key}/${fmt}`)
+               .then(res => res.data);
         
     }
-};

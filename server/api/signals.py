@@ -1,6 +1,8 @@
 from server.model import signals as main
 
-from fastapi import APIRouter, Request
+from server.model.auth import User, check_user_permissions
+
+from fastapi import APIRouter, Request, Depends
 from fastapi.responses import JSONResponse
 
 BASE_URL = '/api/v1'
@@ -12,7 +14,7 @@ restapi = APIRouter(
 )
 
 @restapi.get('/all')
-async def get_signal_list_limit(request: Request):
+async def get_signal_list_limit(request: Request, current_user: User = Depends(check_user_permissions(['ANALYST']))):
     """Возвращает данные по всем сигналам с установленными ограничениями для формы списка сигналов.
     """
     data = dict(request.query_params)
@@ -23,7 +25,7 @@ async def get_signal_list_limit(request: Request):
 
 
 @restapi.get('/{id}')
-async def get_ui_data_cs_signals(request: Request):
+async def get_ui_data_cs_signals(request: Request, current_user: User = Depends(check_user_permissions(['ANALYST']))):
     """ Возвращает результат выполнения запросов для каждого сигнала. Запросы для сигналов хранятся в таблице __tbl_conf_sig_query__.
     """
     idx = request.path_params.get('id', None)

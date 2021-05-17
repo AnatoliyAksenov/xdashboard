@@ -3,7 +3,8 @@
 </template>
 
 <script>
-    import * as d3 from 'd3'
+    import * as d3 from 'd3';
+    window.d3 = d3;
 
 
 	export default {
@@ -40,26 +41,25 @@
             var radius = 80;
             var scheme = categorical[this.colorchema];
     
-    if(!window.pie_shared_color)
-      window.pie_shared_color = d3.scaleOrdinal(scheme || d3.schemePastel1);
+    // if(!window.pie_shared_color)
+    //   window.pie_shared_color = d3.scaleOrdinal(scheme || d3.schemePastel1);
 
-    var color = window.pie_shared_color;//d3.scaleOrdinal(scheme || d3.schemeCategory20);        
-    console.log(this.$refs.chart);
+    var color = d3.scaleOrdinal(d3.schemeAccent); //window.pie_shared_color;//d3.scaleOrdinal(scheme || d3.schemeCategory20);   
+
     var svg = d3.select(this.$refs.chart)
       .append('svg')
       .attr('class', 'pie')
       //.attr('class', 'fleft')
       .attr('width', width)
       .attr('height', height);
-    console.log(svg)
+
     var g = svg.append('g')
       .style("cursor", "default")
       .attr('transform', 'translate(100, 100)');
       
     var arc = d3.arc()
       .outerRadius(radius - radius*0.3)
-      .innerRadius(radius);
-      
+      .innerRadius(radius);      
       
     var pie = d3.pie()
       .value(function(d) { return d.value; })
@@ -105,7 +105,7 @@
       g.selectAll('path.pie')
         .data( pie(data) )
         .join('path')
-        .attr('fill', (d,i) => d.value == '0.1'? 'lightgray': color(d.confirmation))
+        .attr('fill', (d,i) => d.data.value == '0.1'? 'lightgray': color(d.data.confirmation))
         .style('opacity', opacity)
         .style('stroke', 'white')        
         .attr('class', 'pie')
@@ -115,8 +115,7 @@
           }
         })
         .on('mousemove', d => {
-          d3.selectAll('path.pie').filter( e => e.data == d.data)
-          .style('cursor', 'pointer');
+
 
           var others = svg.selectAll("path.pie").filter( (e) => {
               return e.data != d.data
@@ -124,13 +123,16 @@
           others.style('opacity', 0.4);
 
           tooltipGroup
-            .attr('transform', `translate(${d3.event.layerX},${d3.event.layerY})`)
+            .attr('transform', `translate(${ d3.event.layerX + 5 },${ d3.event.layerY + 5 })`);
         })
         .on('mouseenter', d => {
           tooltipGroup.append('text')
-            .text(` ${d.name} (${ lbl(d.value) })`)
+            .text(` ${d.data.name} (${ lbl(d.data[this.param]) })`)
             .style("font-size", "12px")
-            .attr("alignment-baseline","middle")
+            .attr("alignment-baseline","middle");
+          
+          d3.selectAll('path.pie').filter( e => e.data == d.data)
+          .style('cursor', 'pointer');  
         })
         .on('mouseleave', () => {
           tooltipGroup.select('text').remove();
@@ -155,7 +157,7 @@
         .join("text")
         .attr("x", 115 )
         .attr("y", (d, i) => -75 + 15 * i)
-        .text( (d, i) => d.name + (input == undefined? "": " (" + lbl( 0 ) + ')') )
+        .text( (d, i) => d.name + " " + (data == undefined? "": " (" + lbl( d[this.param] ) + ')') )
         .style("font-size", "10px")
         .attr("alignment-baseline","middle")
         .attr('class', 'legend')
@@ -186,7 +188,7 @@
         .join('text')
         .attr("x", 100 )
         .attr("y", -90)
-        .text( d => d + " (" + (input == undefined ? '0': lbl( data.reduce( (r,e) => r + e[this.param], 0)) ) + ")")
+        .text( d => d + " (" + (data == undefined ? '0': lbl( data.reduce( (r,e) => r + e[this.param], 0)) ) + ")")
         .style("font-size", "12px")
         .attr("alignment-baseline","middle")
         .attr('class', 'header')
