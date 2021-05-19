@@ -1,4 +1,4 @@
-# vue_board
+# xboard
 
 > XBoard for monitor system
 
