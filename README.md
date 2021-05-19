@@ -1,6 +1,6 @@
 # vue_board
 
-> Board for monitor system
+> XBoard for monitor system
 
 ## Build Setup
 
