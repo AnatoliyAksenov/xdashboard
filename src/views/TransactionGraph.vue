@@ -8,6 +8,9 @@
           </md-button>
         </div>
         <div class="md-toolbar-section-end">
+            <md-button class="md-icon-button md-primary" @click="save">
+              <md-icon>save</md-icon>            
+            </md-button>
             <md-button class="md-icon-button md-primary">
               <md-icon>refresh</md-icon>            
             </md-button>
@@ -53,9 +56,10 @@
                     <text x="17.5" y="112.5">Name</text>
                   </g>
                   <rect x="0" y="115" width="250" height="30" fill="none" stroke="none" pointer-events="none"/>
-                  <g fill="#000000" font-family="Helvetica" font-size="16px">
+                  <g fill="#000000" font-family="Helvetica" font-size="16px">                    
                     <text x="17.5" y="136.5">{{ node.name }}</text>
                   </g>
+                  <text x="17.5" y="100" class="md-icon md-icon-font md-theme-default md-size-2x">business</text>
                   
                   <path d="M 11.55 150 L 238.43 150" fill="none" stroke="#eeeeee" stroke-miterlimit="10" pointer-events="none"/>
                   
@@ -134,6 +138,8 @@
 
 <script>
   import * as d3 from 'd3';
+
+  import { download } from '../utils/link';
 
       const width = 1200;
       const height = 800;
@@ -285,8 +291,13 @@
       showAddLink: false,
       node_width: 300,
     }),
+    methods: {
+      save(){
+        const xml = (new XMLSerializer).serializeToString(svg.node());
+        download(xml, 'image/svg+xml', 'transaction_graph.svg');
+      }
+    },
     mounted(){
-
 
       svg = d3.select(this.$refs.graph)
         .attr("width", width)
@@ -365,6 +376,8 @@
       "links": function(n, o){
 
         this.$nextTick(function () {
+          const path_style = `stroke: #aaa; stroke-width: 2px; stroke-linejoin: round; stroke-linecap: round; marker-start: url(#dot); marker-end: url(#arrow2); pointer-events: auto; fill: none;`;
+
           const linkg = gl.selectAll("g.link")
           .data( this.links )
           .join("g")
@@ -375,6 +388,7 @@
             .data(d => [d])
             .join('path')
             .attr('class', 'link')
+            .attr('style', path_style)
             .attr("src", d => d.src)
             .attr("trg", d => d.trg)
             .attr("d", linkHovecal)
